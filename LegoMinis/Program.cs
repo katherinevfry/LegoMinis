@@ -1,4 +1,7 @@
 ﻿using LegoMinis.Heads;
+using LegoMinis.Legs;
+using LegoMinis.Torsos;
+using LegoMinis.MiniFigure;
 using System;
 using System.Collections.Generic;
 
@@ -23,6 +26,47 @@ namespace LegoMinis
                 head.Spin();
             }
 
+            var batmanTorso = new BatSuitTorso();
+            batmanTorso.BodyColor = LegoColor.Black;
+            batmanTorso.HasBatBoomerang = true;
+            batmanTorso.HasShirt = false;
+            batmanTorso.Donates();
+
+            var cowboyTorso = new CowboyTorso();
+
+            var sumoTorso = new SumoTorso();
+
+            var torsos = new List<TorsoBase>() { batmanTorso, cowboyTorso, sumoTorso };
+
+            foreach (var torso in torsos)
+            {
+                torso.Greeting();
+                torso.Wiggle();
+            }
+
+            var seaLegs = new SeaLeg();
+            seaLegs.AreWobbly = true;
+            seaLegs.Bottoms = BottomsType.MomJeans;
+            seaLegs.NumberOfLegs = 3;
+            seaLegs.Kicks = ShoesType.docMartens;
+
+            var magicLegs = new MagicLeg();
+            magicLegs.Bottoms = BottomsType.CargoShorts;
+            magicLegs.HasInvisibleLegs = true;
+            magicLegs.MeasuringLegs("small");
+            Console.WriteLine($"Magic Legs have a length of {magicLegs.Length} inchs");
+
+            var legs = new List<LegBase>() { seaLegs, magicLegs };
+
+            foreach (var leg in legs)
+            {
+                leg.Dance();
+                leg.Walk();
+            }
+
+            var bob = new MiniFigureBase(workerHead, cowboyTorso, magicLegs);
+            bob.BuildIt();
+            bob.Head.SayHi();
         }
     }
 }
